@@ -19,6 +19,7 @@
 		<openapi.generator.version>7.4.0</openapi.generator.version>
 		<jakarta.annotations.version>3.0.0</jakarta.annotations.version>
 		<io.swagger.core.version>2.2.21</io.swagger.core.version>
+		<org.springdoc.version>2.5.0</org.springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -39,6 +40,11 @@
 			<groupId>org.openapitools</groupId>
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>${openapi.tools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${org.springdoc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
