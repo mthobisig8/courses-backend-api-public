@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: OpenApi Specification for University
+  version: '1.0.0'
+servers:
+  - url: http://localhost:2020
+tags:
+  - name: Courses
+    description: Api generates data Course
+  - name: Lessons
+    description: API generates Lessons
+
+paths:
+  /courses:
+    post:
+      description: Endpoint to save bulk of courses to the db
+      tags:
+        - Courses
+      summary: Add bulk courses
+      operationId: add-course
+      requestBody:
+        description: 'add a course'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/course-dto'
+      responses:
+        201:
+          description: Course has been added successfully
+          content:
+            application/json:
+              schema:
+                type: string
+
+        404:
+          description: Not found
+        500:
+          description: Server encounted an error
+        default:
+          description: Unexpected error
+
+    get:
+      description: Retrieve course information from the db
+      tags:
+        - Courses
+      summary: Get courses
+      operationId: find-all-courses
+      responses:
+        200:
+          description: Successful Pull of courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/course-dto'
+        404:
+          description: Request not found
+        400:
+          description: Incorrect Input
+        500:
+          description: Server encountered an error
+        default:
+          description: Unexpected error
+components:
+  schemas:
+    course-dto:
+      description: Model for an individual course
+      properties:
+        name:
+          type: string
+          example: "Angular 17"
+        description:
+          type: string
+          example: "TEST"
+        thumbNailUrl:
+          type: string
+          example: "https://your-sexample.com"
+        difficultLevel:
+          type: string
+          enum: ["BEGINNER", "INTERMEDIATE", "ADVANCED"]
+          example: "BEGINNER"
+        lessons:
+          type: array
+          items:
+            $ref: "#/components/schemas/lesson-dto"
+    lesson-dto:
+      description: Model for an individual lesson
+      properties:
+        lessonName:
+          type: string
+          example: "Lesson 1: Introduction"
+        duration:
+          type: number
+          format: double
+          example: 30.5
